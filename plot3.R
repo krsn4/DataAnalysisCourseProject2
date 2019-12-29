@@ -1,0 +1,15 @@
+#fileUrl <- "https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2FNEI_data.zip"
+#download.file(fileUrl, destfile = "dataset.zip")
+#unzip("dataset.zip")
+NEI <- readRDS("summarySCC_PM25.rds")
+SCC <- readRDS("Source_Classification_Code.rds")
+
+#3 (type-level emission sums)
+library(ggplot2)
+#g <- ggplot(NEI_bal, aes(x=year, y=Emissions))
+##g + geom_col() + facet_wrap(.~type)
+#g + stat_summary(geom="line", fun.y="sum") + facet_wrap(.~type, scales = "free") + ylab("PM2.5 total emissions (tons)")
+png(file = "plot3.png")
+g2 <- ggplot(NEI_bal, aes(x=year, y=Emissions, col = type))
+g2 + stat_summary(geom="line", fun.y = "sum") + ylab("PM2.5 total emissions (tons)")
+dev.off()
